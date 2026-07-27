@@ -17,7 +17,7 @@ es:
     password: ""
     is_console_print: true
 gaode:
-    enable: false
+    enable: true
     key: 3e448832039c28792a42ec7c42c12d34
 jwt:
     access_token_secret: 1CPKVgqSv7evK84l78aqAAMRSSJTVCUGcmH85l7SpFA=
@@ -38,12 +38,12 @@ mysql:
 qiniu:
     zone: z0
     bucket: go-blog-images
-    img_path: https://tirc1hsbz.hb-bkt.clouddn.com   #测试域名，正式用要自己绑备案域名
+    img_path: https://tirc1hsbz.hb-bkt.clouddn.com
     access_key: xiTV0hNtCefPFHMpQHGTnx4ZYOqcONMjj9QKrsmP
     secret_key: FYnDdhXPzE3EH4OA8RspRqvc-P-P1NODQMEjtZuP
     use_https: true
     use_cdn_domains: true
-qq:     #qq第三方登录，创建网站后用
+qq:
     enable: false
     app_id: "000000000"
     app_key: xxxxxxxxxxxxxxxx
@@ -69,19 +69,18 @@ website:
     title: 心之所想
     slogan: 心之所想
     slogan_en: Follow Your Heart
-    description: 博客描述
+    description: 随时随地分享你的想法
     version: 1.0.0
-    created_at: "2025-1-15"
+    created_at: "2026-1-15"
     icp_filing: icp备案号
     public_security_filing: 公安备案号
     bilibili_url: https://space.bilibili.com/3494363720059293
-    gitee_url: https://gitee.com/xxx
-    github_url: https://github.com/xxx/
-    name: 昵称
-    job: 工作
-    address: 地址
-    email: xxx@qq.com
-    qq_image: ""
+    github_url: https://github.com/xiaoxin186/go_blog
+    name: xiaoxin
+    job: golang后端开发
+    address: 北京
+    email: 2454919667@qq.com
+    qq_image: /uploads/image/19162bca823aeb32e7cedb7defb24e3e-20260727084523.jpg
     wechat_image: ""
 zap:
     level: info
@@ -89,4 +88,4 @@ zap:
     max_size: 200
     max_backups: 30
     max_age: 5
-    is_console_print: true 
+    is_console_print: true

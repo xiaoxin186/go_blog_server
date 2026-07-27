@@ -13,7 +13,6 @@ type Website struct {
 	IcpFiling            string `json:"icp_filing" yaml:"icp_filing"`                         // ICP 备案
 	PublicSecurityFiling string `json:"public_security_filing" yaml:"public_security_filing"` // 公安备案
 	BilibiliURL          string `json:"bilibili_url" yaml:"bilibili_url"`                     // Bilibili 链接
-	GiteeURL             string `json:"gitee_url" yaml:"gitee_url"`                           // Gitee 链接
 	GithubURL            string `json:"github_url" yaml:"github_url"`                         // GitHub 链接
 	Name                 string `json:"name" yaml:"name"`                                     // 昵称
 	Job                  string `json:"job" yaml:"job"`                                       // 职业
