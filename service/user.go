@@ -49,36 +49,6 @@ func (userService *UserService) EmailLogin(u database.User) (database.User, erro
 	return database.User{}, err
 }
 
-func (userService *UserService) QQLogin(accessTokenResponse other.AccessTokenResponse) (database.User, error) {
-	var user database.User
-
-	// 尝试查找用户
-	err := global.DB.Where("openid = ?", accessTokenResponse.Openid).First(&user).Error
-	if err != nil && !errors.Is(err, gorm.ErrRecordNotFound) {
-		return database.User{}, err
-	}
-
-	// 如果用户不存在，则创建新用户
-	if errors.Is(err, gorm.ErrRecordNotFound) {
-		userInfoResponse, err := ServiceGroupApp.QQService.GetUserInfoByAccessTokenAndOpenid(accessTokenResponse.AccessToken, accessTokenResponse.Openid)
-		if err != nil {
-			return database.User{}, err
-		}
-		user.UUID = uuid.Must(uuid.NewV4())
-		user.Username = userInfoResponse.Nickname
-		user.Openid = accessTokenResponse.Openid
-		user.Avatar = userInfoResponse.FigureurlQQ2
-		user.RoleID = appTypes.User
-		user.Register = appTypes.QQ
-
-		if err := global.DB.Create(&user).Error; err != nil {
-			return database.User{}, err
-		}
-	}
-
-	return user, nil
-}
-
 func (userService *UserService) ForgotPassword(req request.ForgotPassword) error {
 	var user database.User
 	if err := global.DB.Where("email = ?", req.Email).First(&user).Error; err != nil {

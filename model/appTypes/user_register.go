@@ -7,7 +7,6 @@ type Register int
 
 const (
 	Email Register = iota // 邮箱验证码注册
-	QQ                    // QQ登录注册
 )
 
 // MarshalJSON 实现了 json.Marshaler 接口
@@ -31,8 +30,6 @@ func (r Register) String() string {
 	switch r {
 	case Email:
 		str = "邮箱"
-	case QQ:
-		str = "QQ"
 	default:
 		str = "未知"
 	}
@@ -44,8 +41,6 @@ func ToRegister(str string) Register {
 	switch str {
 	case "邮箱":
 		return Email
-	case "QQ":
-		return QQ
 	default:
 		return -1
 	}

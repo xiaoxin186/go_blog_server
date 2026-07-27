@@ -61,16 +61,9 @@ func (userApi *UserApi) Register(c *gin.Context) {
 	userApi.TokenNext(c, user)
 }
 
-// Login 登录接口，根据不同的登录方式调用不同的登录方法
+// Login 登录接口
 func (userApi *UserApi) Login(c *gin.Context) {
-	switch c.Query("flag") {
-	case "email":
-		userApi.EmailLogin(c)
-	case "qq":
-		userApi.QQLogin(c)
-	default:
-		userApi.EmailLogin(c)
-	}
+	userApi.EmailLogin(c)
 }
 
 // EmailLogin 邮箱登录
@@ -99,33 +92,6 @@ func (userApi *UserApi) EmailLogin(c *gin.Context) {
 	response.FailWithMessage("Incorrect verification code", c)
 }
 
-// QQLogin QQ登录
-func (userApi *UserApi) QQLogin(c *gin.Context) {
-	code := c.Query("code")
-	if code == "" {
-		response.FailWithMessage("Code is required", c)
-		return
-	}
-
-	// 获取访问令牌
-	accessTokenResponse, err := qqService.GetAccessTokenByCode(code)
-	if err != nil || accessTokenResponse.Openid == "" {
-		global.Log.Error("Invalid code", zap.Error(err))
-		response.FailWithMessage("Invalid code", c)
-		return
-	}
-
-	// 根据访问令牌进行QQ登录
-	user, err := userService.QQLogin(accessTokenResponse)
-	if err != nil {
-		global.Log.Error("Failed to login:", zap.Error(err))
-		response.FailWithMessage("Failed to login", c)
-		return
-	}
-
-	// 登录成功后生成 token
-	userApi.TokenNext(c, user)
-}
 
 func (userApi *UserApi) TokenNext(c *gin.Context, user database.User) {
 	// 检查用户是否被冻结
@@ -337,6 +303,10 @@ func (userApi *UserApi) UserChangeInfo(c *gin.Context) {
 
 // UserWeather 获取天气
 func (userApi *UserApi) UserWeather(c *gin.Context) {
+	if !global.Config.Gaode.Enable {
+		response.OkWithData("", c)
+		return
+	}
 	ip := c.ClientIP()
 	weather, err := userService.UserWeather(ip)
 	if err != nil {

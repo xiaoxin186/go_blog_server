@@ -6,7 +6,6 @@ type ServiceGroup struct {
 	JwtService
 	GaodeService
 	UserService
-	QQService
 	ImageService
 	ArticleService
 	CommentService

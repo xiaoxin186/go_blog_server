@@ -17,7 +17,7 @@ es:
     password: ""
     is_console_print: true
 gaode:
-    enable: true
+    enable: false
     key: 3e448832039c28792a42ec7c42c12d34
 jwt:
     access_token_secret: 1CPKVgqSv7evK84l78aqAAMRSSJTVCUGcmH85l7SpFA=
@@ -43,11 +43,7 @@ qiniu:
     secret_key: FYnDdhXPzE3EH4OA8RspRqvc-P-P1NODQMEjtZuP
     use_https: true
     use_cdn_domains: true
-qq:
-    enable: false
-    app_id: "000000000"
-    app_key: xxxxxxxxxxxxxxxx
-    redirect_uri: http://xxx.xxx/xxx
+
 redis:
     address: 127.0.0.1:6379
     password: ""
